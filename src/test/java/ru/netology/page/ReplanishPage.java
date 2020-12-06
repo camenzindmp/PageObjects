@@ -11,27 +11,30 @@ public class ReplanishPage {
     public ReplanishPage() { sumToTransferField.shouldBe(Condition.visible);
     }
 
-    private SelenideElement sumToTransferField = $("[data-test-id=amount] [class='input__inner']");
+    private SelenideElement sumToTransferField = $("[data-test-id=amount] [type=text]");
     private SelenideElement cardForTransferField = $("[data-test-id=from] [class='input__inner']");
     private SelenideElement finishReplanishButton = $("[data-test-id='action-transfer']");
 
     public ReplanishPage setSumToTransfer() {
+        sumToTransferField.click();
         sumToTransferField.setValue("100");
         return new ReplanishPage();
     }
 
     public ReplanishPage setFirstCard(CardsData.CardsInfo getFirstCardInfo) {
+        cardForTransferField.clear();
         cardForTransferField.setValue(getFirstCardInfo.getCardNumber());
         return new ReplanishPage();
     }
 
     public ReplanishPage setSecondCard(CardsData.CardsInfo getSecondCardInfo) {
+        cardForTransferField.clear();
         cardForTransferField.setValue(getSecondCardInfo.getCardNumber());
         return new ReplanishPage();
     }
 
-    public DashboardPage finishReplanish() {
+    public void finishReplanish() {
         finishReplanishButton.click();
-        return new DashboardPage();
+        new DashboardPage();
     }
 }
