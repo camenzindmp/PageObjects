@@ -43,15 +43,15 @@ public class MoneyTransferTest {
         replanishPage.finishReplanish();
     }
 
-    @Test
-    void getBalanceTest() {
-        val loginPage = new LoginPage();
-        val authInfo = AuthData.getAuthInfo();
-        val verificationPage = loginPage.validLogin(authInfo);
-        val verificationCode = AuthData.getVerificationCodeFor(authInfo);
-        verificationPage.validVerify(verificationCode);
-        val dashboardPage = new DashboardPage();
-        dashboardPage.getFirstCardBalance();
-
-    }
+//    @Test
+//    void getBalanceTest() {
+//        val loginPage = new LoginPage();
+//        val authInfo = AuthData.getAuthInfo();
+//        val verificationPage = loginPage.validLogin(authInfo);
+//        val verificationCode = AuthData.getVerificationCodeFor(authInfo);
+//        verificationPage.validVerify(verificationCode);
+//        val dashboardPage = new DashboardPage();
+//        dashboardPage.getFirstCardBalance();
+//
+//    }
 }
