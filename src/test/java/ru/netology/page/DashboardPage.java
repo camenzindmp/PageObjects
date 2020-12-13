@@ -2,6 +2,7 @@ package ru.netology.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import lombok.val;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -9,7 +10,6 @@ import static com.codeborne.selenide.Selenide.open;
 public class DashboardPage {
 
     public DashboardPage() {
-        open("http://localhost:9999/dashboard");
         dashboardHeader.shouldBe(Condition.visible);
     }
 
@@ -18,18 +18,27 @@ public class DashboardPage {
     private SelenideElement replanishSecondCardButton = $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d'] [data-test-id=action-deposit]");
     private SelenideElement refreshButton = $("[data-test-id=action-reload]");
 
-    private SelenideElement firstCardBalance = $("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0']");
-    private SelenideElement secondCardBalance = $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d']");
+    private SelenideElement firstCardBalanceValue = $("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0']");
+    private SelenideElement secondCardBalanceValue = $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d']");
+    private final String balanceStart = "баланс: ";
+    private final String balanceFinish = " р.";
 
 
-    public String getFirstCardBalance() {
-        String balance = firstCardBalance.getText();
-        return balance;
+    public int getFirstCardBalance() {
+        val text = firstCardBalanceValue.text();
+        return extractBalance(text);
     }
 
-    public DashboardPage getSecondCardBalance() {
-        secondCardBalance.getText();
-        return new DashboardPage();
+    public int getSecondCardBalance() {
+        val text = secondCardBalanceValue.text();
+        return extractBalance(text);
+    }
+
+    private int extractBalance(String text) {
+        val start = text.indexOf(balanceStart);
+        val finish = text.indexOf(balanceFinish);
+        val value = text.substring(start + balanceStart.length(), finish);
+        return Integer.parseInt(value);
     }
 
     public ReplanishPage replanishFirstCard() {
