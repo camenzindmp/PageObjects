@@ -6,13 +6,11 @@ import ru.netology.data.AuthData;
 import ru.netology.data.CardsData;
 import ru.netology.page.DashboardPage;
 import ru.netology.page.LoginPage;
-import ru.netology.page.ReplanishPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class MoneyTransferTest {
-    String sumToTransfer = "1000";
 
     @Test
     DashboardPage shouldLoginAndVerify() {
@@ -25,26 +23,28 @@ public class MoneyTransferTest {
 
     @Test
     void replanishFirstCard() {
+        CardsData.TransferSumValue transferSum = CardsData.getSumToTransfer();
         val dashboardPage = shouldLoginAndVerify();
         val firstCardBalance = dashboardPage.getFirstCardBalance();
         val replanishPage = dashboardPage.replanishFirstCard();
-        replanishPage.setSumToTransfer(sumToTransfer);
+        replanishPage.setSumToTransfer();
         replanishPage.setSecondCard();
         replanishPage.finishReplanish();
-        val updatedCardBalance = firstCardBalance + sumToTransfer;
-        assertEquals(firstCardBalance + sumToTransfer, updatedCardBalance);
+        val updatedCardBalance = firstCardBalance + transferSum.getSumToTransfer();
+        assertEquals(firstCardBalance + transferSum.getSumToTransfer(), updatedCardBalance);
     }
 
     @Test
     void replanishSecondCard() {
+        CardsData.TransferSumValue transferSum = CardsData.getSumToTransfer();
         val dashboardPage = shouldLoginAndVerify();
         val secondCardBalance = dashboardPage.getSecondCardBalance();
         val replanishPage = dashboardPage.replanishSecondCard();
-        replanishPage.setSumToTransfer(sumToTransfer);
+        replanishPage.setSumToTransfer();
         replanishPage.setFirstCard();
         replanishPage.finishReplanish();
-        val updatedCardBalance = secondCardBalance + sumToTransfer;
-        assertEquals(secondCardBalance + sumToTransfer, updatedCardBalance);
+        val updatedCardBalance = secondCardBalance + transferSum.getSumToTransfer();
+        assertEquals(secondCardBalance + transferSum.getSumToTransfer(), updatedCardBalance);
     }
 
 //    @Test

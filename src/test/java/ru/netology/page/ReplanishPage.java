@@ -2,7 +2,7 @@ package ru.netology.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.Keys;
+import ru.netology.data.CardsData;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -16,28 +16,22 @@ public class ReplanishPage {
     private SelenideElement cardForTransferField = $("[data-test-id=from] [class='input__control']");
     private SelenideElement finishReplanishButton = $("[data-test-id='action-transfer']");
 
-    public ReplanishPage setSumToTransfer(String sumToTransfer) {
+    public ReplanishPage setSumToTransfer() {
+        CardsData.TransferSumValue transferSum = CardsData.getSumToTransfer();
         sumToTransferField.click();
-        sumToTransferField.setValue(sumToTransfer);
+        sumToTransferField.setValue(transferSum.getSumToTransfer());
         return new ReplanishPage();
     }
 
-    //    public ReplanishPage setFirstCard(CardsData.CardsInfo getFirstCardInfo) {
-//        cardForTransferField.clear();
-//        cardForTransferField.setValue(getFirstCardInfo.getCardNumber());
-//        return new ReplanishPage();
-//    }
     public ReplanishPage setFirstCard() {
-        cardForTransferField.setValue("5559000000000001");
+        CardsData.CardsInfo cardsInfo = CardsData.getFirstCardInfo();
+        cardForTransferField.setValue(cardsInfo.getCardNumber());
         return new ReplanishPage();
     }
 
-    //    public ReplanishPage setSecondCard(CardsData.CardsInfo getSecondCardInfo) {
-//        cardForTransferField.setValue(getSecondCardInfo.getCardNumber());
-//        return new ReplanishPage();
-//     }
     public ReplanishPage setSecondCard() {
-        cardForTransferField.setValue("5559000000000002");
+        CardsData.CardsInfo cardsInfo = CardsData.getSecondCardInfo();
+        cardForTransferField.setValue(cardsInfo.getCardNumber());
         return new ReplanishPage();
     }
 
