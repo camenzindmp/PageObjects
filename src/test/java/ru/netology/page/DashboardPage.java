@@ -34,7 +34,7 @@ public class DashboardPage {
 //    }
 
     public int getCardBalance(int index) {
-        val card = $$("[data-test-id]").get(index);
+        val card = $$("[class='list__item']").get(index);
         val text = card.text();
         return extractBalance(text);
     }

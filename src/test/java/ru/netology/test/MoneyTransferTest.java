@@ -26,7 +26,7 @@ public class MoneyTransferTest {
         CardsData.TransferSumValue transferSum = CardsData.getSumToTransfer();
         val dashboardPage = shouldLoginAndVerify();
 //        val firstCardBalance = dashboardPage.getFirstCardBalance();
-        val firstCardBalance = dashboardPage.getCardBalance(1);
+        val firstCardBalance = dashboardPage.getCardBalance(0);
         val replanishPage = dashboardPage.replanishFirstCard();
         replanishPage.setSumToTransfer();
         replanishPage.setSecondCard();
@@ -40,7 +40,7 @@ public class MoneyTransferTest {
         CardsData.TransferSumValue transferSum = CardsData.getSumToTransfer();
         val dashboardPage = shouldLoginAndVerify();
 //        val secondCardBalance = dashboardPage.getSecondCardBalance();
-        val secondCardBalance = dashboardPage.getCardBalance(2);
+        val secondCardBalance = dashboardPage.getCardBalance(1);
         val replanishPage = dashboardPage.replanishSecondCard();
         replanishPage.setSumToTransfer();
         replanishPage.setFirstCard();
