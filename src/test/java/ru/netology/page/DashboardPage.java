@@ -4,8 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.val;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class DashboardPage {
 
@@ -24,13 +23,19 @@ public class DashboardPage {
     private final String balanceFinish = " р.";
 
 
-    public int getFirstCardBalance() {
-        val text = firstCardBalanceValue.text();
-        return extractBalance(text);
-    }
+//    public int getFirstCardBalance() {
+//        val text = firstCardBalanceValue.text();
+//        return extractBalance(text);
+//    }
+//
+//    public int getSecondCardBalance() {
+//        val text = secondCardBalanceValue.text();
+//        return extractBalance(text);
+//    }
 
-    public int getSecondCardBalance() {
-        val text = secondCardBalanceValue.text();
+    public int getCardBalance(int index) {
+        val card = $$("[data-test-id]").get(index);
+        val text = card.text();
         return extractBalance(text);
     }
 

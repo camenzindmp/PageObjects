@@ -25,7 +25,8 @@ public class MoneyTransferTest {
     void replanishFirstCard() {
         CardsData.TransferSumValue transferSum = CardsData.getSumToTransfer();
         val dashboardPage = shouldLoginAndVerify();
-        val firstCardBalance = dashboardPage.getFirstCardBalance();
+//        val firstCardBalance = dashboardPage.getFirstCardBalance();
+        val firstCardBalance = dashboardPage.getCardBalance(1);
         val replanishPage = dashboardPage.replanishFirstCard();
         replanishPage.setSumToTransfer();
         replanishPage.setSecondCard();
@@ -38,7 +39,8 @@ public class MoneyTransferTest {
     void replanishSecondCard() {
         CardsData.TransferSumValue transferSum = CardsData.getSumToTransfer();
         val dashboardPage = shouldLoginAndVerify();
-        val secondCardBalance = dashboardPage.getSecondCardBalance();
+//        val secondCardBalance = dashboardPage.getSecondCardBalance();
+        val secondCardBalance = dashboardPage.getCardBalance(2);
         val replanishPage = dashboardPage.replanishSecondCard();
         replanishPage.setSumToTransfer();
         replanishPage.setFirstCard();
@@ -46,14 +48,4 @@ public class MoneyTransferTest {
         val updatedCardBalance = secondCardBalance + transferSum.getSumToTransfer();
         assertEquals(secondCardBalance + transferSum.getSumToTransfer(), updatedCardBalance);
     }
-
-//    @Test
-//    void getBalanceTest() {
-//        val loginPage = new LoginPage();
-//        val authInfo = AuthData.getAuthInfo();
-//        val verificationPage = loginPage.validLogin(authInfo);
-//        val verificationCode = AuthData.getVerificationCodeFor(authInfo);
-//        val dashboardPage = verificationPage.validVerify(verificationCode);
-//        dashboardPage.getSecondCardBalance();
-//    }
 }
