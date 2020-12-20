@@ -1,6 +1,8 @@
 package ru.netology.data;
-
 import lombok.Value;
+import ru.netology.page.DashboardPage;
+
+import java.util.Random;
 
 public class CardsData {
     private CardsData() {
@@ -11,20 +13,29 @@ public class CardsData {
         private String cardNumber;
     }
 
-    public static CardsInfo getFirstCardInfo() {
-        return new CardsInfo("5559 0000 0000 0001");
-    }
+    public static CardsInfo getFirstCardInfo() { return new CardsInfo("5559 0000 0000 0001"); }
 
     public static CardsInfo getSecondCardInfo() {
         return new CardsInfo("5559 0000 0000 0002");
     }
 
+//    @Value
+//    public static class TransferSumValue {
+//        private int sumToTransfer;
+//    }
+//
+//    public static TransferSumValue generateSumToTransfer() {return new TransferSumValue(1000);}
+//}
+
     @Value
     public static class TransferSumValue {
-        private String sumToTransfer;
+        private int sumToTransfer;
     }
 
-        public static TransferSumValue getSumToTransfer() {return new TransferSumValue("1000");}
+    public static TransferSumValue generateSumToTransfer(DashboardPage) {
+        int cardBalance = new DashboardPage().getCardBalance(int index); // как передавать текущий баланс сюда???
+        Random rnd = new Random(System.currentTimeMillis());
+        int sumToTransfer = 1 + rnd.nextInt(  cardBalance - 1);
+        return new TransferSumValue(sumToTransfer);
     }
-
-
+}
