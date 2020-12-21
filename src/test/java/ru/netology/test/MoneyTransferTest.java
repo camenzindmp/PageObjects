@@ -22,11 +22,11 @@ public class MoneyTransferTest {
 
     @Test
     void replenishFirstCard() {
-        val transferSum = CardsData.generateSumToTransfer();
         val cardNumber = CardsData.getSecondCardInfo();
         val dashboardPage = shouldLoginAndVerify();
         val initialFirstCardBalance = dashboardPage.getCardBalance(0);
         val initialSecondCardBalance = dashboardPage.getCardBalance(1);
+        val transferSum = CardsData.generateSumToTransfer(initialSecondCardBalance);
         val replenishPage = dashboardPage.replenishFirstCard();
         val expectedFirstCardBalance = initialFirstCardBalance + transferSum.getSumToTransfer();
         val expectedSecondCardBalance = initialSecondCardBalance - transferSum.getSumToTransfer();
@@ -41,11 +41,11 @@ public class MoneyTransferTest {
 
     @Test
     void replenishSecondCard() {
-        val transferSum = CardsData.generateSumToTransfer();
         val cardNumber = CardsData.getFirstCardInfo();
         val dashboardPage = shouldLoginAndVerify();
         val initialFirstCardBalance = dashboardPage.getCardBalance(0);
         val initialSecondCardBalance = dashboardPage.getCardBalance(1);
+        val transferSum = CardsData.generateSumToTransfer(initialFirstCardBalance);
         val replenishPage = dashboardPage.replenishSecondCard();
         val expectedFirstCardBalance = initialFirstCardBalance - transferSum.getSumToTransfer();
         val expectedSecondCardBalance = initialSecondCardBalance + transferSum.getSumToTransfer();

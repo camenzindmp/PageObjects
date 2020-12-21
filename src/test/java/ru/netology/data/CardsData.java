@@ -19,21 +19,12 @@ public class CardsData {
         return new CardsInfo("5559 0000 0000 0002");
     }
 
-//    @Value
-//    public static class TransferSumValue {
-//        private int sumToTransfer;
-//    }
-//
-//    public static TransferSumValue generateSumToTransfer() {return new TransferSumValue(1000);}
-//}
-
     @Value
     public static class TransferSumValue {
         private int sumToTransfer;
     }
 
-    public static TransferSumValue generateSumToTransfer(DashboardPage) {
-        int cardBalance = new DashboardPage().getCardBalance(int index); // как передавать текущий баланс сюда???
+    public static TransferSumValue generateSumToTransfer(int cardBalance) {
         Random rnd = new Random(System.currentTimeMillis());
         int sumToTransfer = 1 + rnd.nextInt(  cardBalance - 1);
         return new TransferSumValue(sumToTransfer);
