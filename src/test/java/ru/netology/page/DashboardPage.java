@@ -1,6 +1,7 @@
 package ru.netology.page;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.val;
 
@@ -12,6 +13,7 @@ public class DashboardPage {
         dashboardHeader.shouldBe(Condition.visible);
     }
 
+    private ElementsCollection cards = $$("[class='list__item']");
     private SelenideElement dashboardHeader = $("[data-test-id=dashboard]");
     private SelenideElement replenishFirstCardButton = $("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0'] [data-test-id=action-deposit]");
     private SelenideElement replenishSecondCardButton = $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d'] [data-test-id=action-deposit]");
@@ -21,7 +23,7 @@ public class DashboardPage {
     private final String balanceFinish = " р.";
 
     public int getCardBalance(int index) {
-        val card = $$("[class='list__item']").get(index);
+        val card = cards.get(index);
         val text = card.text();
         return extractBalance(text);
     }
