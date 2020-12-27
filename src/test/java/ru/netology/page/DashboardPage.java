@@ -22,7 +22,7 @@ public class DashboardPage {
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
 
-    public int getCardBalance(int index) {
+        public int getCardBalance(int index) {
         val card = cards.get(index);
         val text = card.text();
         return extractBalance(text);
