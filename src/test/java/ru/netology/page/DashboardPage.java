@@ -1,3 +1,4 @@
+
 package ru.netology.page;
 
 import com.codeborne.selenide.Condition;
@@ -22,9 +23,8 @@ public class DashboardPage {
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
 
-        public int getCardBalance(int index) {
-        val card = cards.get(index);
-        val text = card.text();
+    public int getCardBalance(String cardNumber) {
+        val text = cards.find(Condition.text(cardNumber.substring(15,19))).getText();
         return extractBalance(text);
     }
 
