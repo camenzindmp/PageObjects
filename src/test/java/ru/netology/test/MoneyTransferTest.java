@@ -1,3 +1,4 @@
+
 package ru.netology.test;
 
 import lombok.val;
@@ -8,6 +9,8 @@ import ru.netology.page.DashboardPage;
 import ru.netology.page.LoginPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static ru.netology.data.CardsData.getFirstCardInfo;
+import static ru.netology.data.CardsData.getSecondCardInfo;
 
 
 public class MoneyTransferTest {
@@ -22,38 +25,38 @@ public class MoneyTransferTest {
 
     @Test
     void replenishFirstCard() {
-        val transferSum = CardsData.generateSumToTransfer();
-        val cardNumber = CardsData.getSecondCardInfo();
+        val cardNumber = getSecondCardInfo();
         val dashboardPage = shouldLoginAndVerify();
-        val initialFirstCardBalance = dashboardPage.getCardBalance(0);
-        val initialSecondCardBalance = dashboardPage.getCardBalance(1);
+        val initialFirstCardBalance = dashboardPage.getCardBalance(getFirstCardInfo().getCardNumber());
+        val initialSecondCardBalance = dashboardPage.getCardBalance(getSecondCardInfo().getCardNumber());
+        val transferSum = CardsData.generateSumToTransfer(initialSecondCardBalance);
         val replenishPage = dashboardPage.replenishFirstCard();
         val expectedFirstCardBalance = initialFirstCardBalance + transferSum.getSumToTransfer();
         val expectedSecondCardBalance = initialSecondCardBalance - transferSum.getSumToTransfer();
         replenishPage.setSumToTransfer(transferSum);
         replenishPage.setCard(cardNumber);
         replenishPage.finishReplenish();
-        val updatedFirstCardBalance = dashboardPage.getCardBalance(0);
-        val updatedSecondCardBalance = dashboardPage.getCardBalance(1);
+        val updatedFirstCardBalance = dashboardPage.getCardBalance(getFirstCardInfo().getCardNumber());
+        val updatedSecondCardBalance = dashboardPage.getCardBalance(getSecondCardInfo().getCardNumber());
         assertEquals(expectedFirstCardBalance,updatedFirstCardBalance);
         assertEquals(expectedSecondCardBalance, updatedSecondCardBalance);
     }
 
     @Test
     void replenishSecondCard() {
-        val transferSum = CardsData.generateSumToTransfer();
-        val cardNumber = CardsData.getFirstCardInfo();
+        val cardNumber = getFirstCardInfo();
         val dashboardPage = shouldLoginAndVerify();
-        val initialFirstCardBalance = dashboardPage.getCardBalance(0);
-        val initialSecondCardBalance = dashboardPage.getCardBalance(1);
+        val initialFirstCardBalance = dashboardPage.getCardBalance(getFirstCardInfo().getCardNumber());
+        val initialSecondCardBalance = dashboardPage.getCardBalance(getSecondCardInfo().getCardNumber());
+        val transferSum = CardsData.generateSumToTransfer(initialFirstCardBalance);
         val replenishPage = dashboardPage.replenishSecondCard();
         val expectedFirstCardBalance = initialFirstCardBalance - transferSum.getSumToTransfer();
         val expectedSecondCardBalance = initialSecondCardBalance + transferSum.getSumToTransfer();
         replenishPage.setSumToTransfer(transferSum);
         replenishPage.setCard(cardNumber);
         replenishPage.finishReplenish();
-        val updatedFirstCardBalance = dashboardPage.getCardBalance(0);
-        val updatedSecondCardBalance = dashboardPage.getCardBalance(1);
+        val updatedFirstCardBalance = dashboardPage.getCardBalance(getFirstCardInfo().getCardNumber());
+        val updatedSecondCardBalance = dashboardPage.getCardBalance(getSecondCardInfo().getCardNumber());
         assertEquals(expectedFirstCardBalance,updatedFirstCardBalance);
         assertEquals(expectedSecondCardBalance, updatedSecondCardBalance);
     }
