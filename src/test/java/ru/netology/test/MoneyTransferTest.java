@@ -60,4 +60,29 @@ public class MoneyTransferTest {
         assertEquals(expectedFirstCardBalance,updatedFirstCardBalance);
         assertEquals(expectedSecondCardBalance, updatedSecondCardBalance);
     }
+
+    @Test
+    void transferOneMill() {
+        val cardNumber = getFirstCardInfo();
+        val dashboardPage = shouldLoginAndVerify();
+        val initialFirstCardBalance = dashboardPage.getCardBalance(getFirstCardInfo().getCardNumber());
+        val initialSecondCardBalance = dashboardPage.getCardBalance(getSecondCardInfo().getCardNumber());
+        val transferSum = CardsData.transferOneMill();
+        val replenishPage = dashboardPage.replenishSecondCard();
+        val expectedFirstCardBalance = initialFirstCardBalance - transferSum.getSumToTransfer();
+        val expectedSecondCardBalance = initialSecondCardBalance + transferSum.getSumToTransfer();
+        replenishPage.setSumToTransfer(transferSum);
+        replenishPage.setCard(cardNumber);
+        replenishPage.finishReplenish();
+        val updatedFirstCardBalance = dashboardPage.getCardBalance(getFirstCardInfo().getCardNumber());
+        val updatedSecondCardBalance = dashboardPage.getCardBalance(getSecondCardInfo().getCardNumber());
+        assertEquals(expectedFirstCardBalance,updatedFirstCardBalance);
+        assertEquals(expectedSecondCardBalance, updatedSecondCardBalance);
+    }
+
+    @Test
+    void refreshBrowserPage() {
+        val dashboardPage = shouldLoginAndVerify();
+        dashboardPage.refreshBrowserPage();
+    }
 }

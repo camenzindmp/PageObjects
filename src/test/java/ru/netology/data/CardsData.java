@@ -28,4 +28,9 @@ public class CardsData {
         int sumToTransfer = 1 + rnd.nextInt(  cardBalance - 1);
         return new TransferSumValue(sumToTransfer);
     }
+
+    public static TransferSumValue transferOneMill() {
+        int sumToTransfer = 1000000;
+        return new TransferSumValue(sumToTransfer);
+    }
 }

@@ -49,4 +49,9 @@ public class DashboardPage {
         refreshButton.click();
         return new DashboardPage();
     }
+
+    public DashboardPage refreshBrowserPage() {
+        refresh();
+        return new DashboardPage();
+    }
 }
